@@ -15,6 +15,7 @@ h1 {
 
 #slide-elements {
   display: grid;
+  grid-area: 1/1;
 }
 
 /* all slide-elements children will be in column 1 and line 1 */
@@ -27,4 +28,21 @@ h1 {
 #slide-elements > .active {
   opacity: 1;
   visibility: visible;
+}
+
+#slide {
+  display: grid;
+}
+
+#slide-controls {
+  grid-area: 1/1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* buttons overlay slides, but don't appear */
+#slide-controls button {
+  opacity: 0;
+  appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
