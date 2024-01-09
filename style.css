@@ -3,6 +3,15 @@ body {
   margin: 20px;
 }
 
+body.paused {
+  user-select: none;
+  -web-kit-user-select: none;
+  -web-kit-touch-callout: none;
+  text-size-adjust: none;
+  -web-kit-size-adjust: none;
+  touch-action: manipulation;
+}
+
 img, video {
   display: block;
   max-width: 100%;
@@ -11,6 +20,15 @@ img, video {
 h1 {
   text-align: center;
   font-size: 1.5rem;
+}
+
+#slide {
+  display: grid;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 800px;
+  background: black;
 }
 
 #slide-elements {
@@ -30,14 +48,11 @@ h1 {
   visibility: visible;
 }
 
-#slide {
-  display: grid;
-}
-
 #slide-controls {
   grid-area: 1/1;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: relative;
 }
 
 /* buttons overlay slides, but don't appear */
@@ -45,4 +60,41 @@ h1 {
   opacity: 0;
   appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+#slide-thumb {
+  display: flex;
+  position: absolute;
+  width: 100%;
+}
+
+#slide-thumb > span {
+  flex: 1;
+  display: block;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 5px;
+  border-radius: 4px;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#slide-thumb .thumb-item.active {
+  display: block;
+  height: inherit;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  transform: translateX(-100%);
+  animation: thumb forwards linear running;
+}
+
+#slide-thumb .thumb-item.paused {
+  animation-play-state: paused;
+}
+
+@keyframes thumb {
+  to {
+    transform: initial;
+  }
 }
